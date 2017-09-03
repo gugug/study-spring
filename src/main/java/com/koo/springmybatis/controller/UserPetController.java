@@ -17,6 +17,11 @@ public class UserPetController {
     @Autowired
     UserPetService userPetService;
 
+    @RequestMapping("test")
+    public String test(){
+        return "test";
+    }
+
     @RequestMapping(value="testSelect/{id}")
     public Object testSelect(@PathVariable("id") int id ) {
         UserPet select = userPetService.select(id);
