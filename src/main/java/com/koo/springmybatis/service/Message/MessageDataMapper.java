@@ -11,6 +11,8 @@ public interface MessageDataMapper {
 
     MessageData fetcher();
 
-    MessageData sender();
+    MessageData sender(int temperature, int humidity);
+
+    boolean saveInfo(int temperature, int humidity);
 
 }

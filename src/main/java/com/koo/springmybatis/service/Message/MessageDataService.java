@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 
 /**
+ *
  * Created by gucailiang on 2017/8/25.
  */
 @Service
@@ -15,14 +16,13 @@ public class MessageDataService {
     @Resource
     MessageDataMapper messageDataMapper;
 
-    public MessageData fetcher(){
-        MessageData fetcher = messageDataMapper.fetcher();
-        return fetcher;
+
+    public MessageData sender(int temperature, int humidity) {
+        return messageDataMapper.sender(temperature, humidity);
     }
 
-    public MessageData sender(){
-        MessageData sender = messageDataMapper.sender();
-        return sender;
+    public boolean saveInfo(int temperature, int humidity) {
+        return messageDataMapper.saveInfo(temperature,humidity);
     }
 
 }

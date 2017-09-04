@@ -4,23 +4,23 @@ package com.koo.springmybatis.service.Message;
  * Created by gucailiang on 2017/8/25.
  */
 public class MessageData {
-    private String temperature;
+    private int temperature;
 
-    private String humidity;
+    private int humidity;
 
-    public String getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
 
-    public String getHumidity() {
+    public int getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(String humidity) {
+    public void setHumidity(int humidity) {
         this.humidity = humidity;
     }
 }
