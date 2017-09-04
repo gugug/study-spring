@@ -1,7 +1,7 @@
 package com.koo.springmybatis.controller;
 
-import com.koo.springmybatis.dao.UserPetService;
-import com.koo.springmybatis.entity.UserPet;
+import com.koo.springmybatis.service.UserPet.UserPetService;
+import com.koo.springmybatis.service.UserPet.UserPet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
