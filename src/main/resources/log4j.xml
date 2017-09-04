@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="ERROR"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www.log"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www.log'"/>
         <param name="Append" value="true"/>
@@ -23,7 +23,7 @@
     </appender>
 
     <appender name="WARN"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www_warn.log"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www_warn.log'"/>
         <param name="Append" value="true"/>
@@ -38,7 +38,7 @@
     </appender>
 
     <appender name="DEBUG"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.ConsoleAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www_debug.log"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www_debug.log'"/>
         <param name="Append" value="true"/>
@@ -52,7 +52,7 @@
         </filter>
     </appender>
     <appender name="PERF"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www.perf"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www.perf'"/>
         <param name="Append" value="true"/>
@@ -62,7 +62,7 @@
     </appender>
     <!--bargin-->
     <appender name="bargain"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www_bargain.info"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www_bargain.info'"/>
         <param name="Append" value="true"/>
@@ -78,7 +78,7 @@
     </category>
     <!--LIGHTEN-->
     <appender name="LIGHTEN"
-              class="com.baioo.cp26.common.log.BTDailyRollingFileAppender">
+              class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.home}/'yyyyMMdd'/www_lighten.info"/>
         <param name="DatePattern" value="'/../../'yyyyMMdd'/www_lighten.info'"/>
         <param name="Append" value="true"/>
@@ -93,33 +93,16 @@
         <appender-ref ref="ERROR"/>
     </category>
 
-     <!--FILELOGER
-    <appender name="FILELOGER"
-              clacom.baioo.commonmmon.log.BTDailyRollingFileAppender">
-        <param name="File" value="${log.home}/'yyyyMMdd'/www_file_loger.perf"/>
-        <param name="DatePattern" value="'/../../'yyyyMMdd'/www_file_loger.perf'"/>
-        <param name="Append" value="true"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%d{HH:mm:ss}][%X{traceId}]%m%n"/>
-        </layout>
-    </appender>  
-
-   <category name="FILELOGER" additivity="false">
-        <priority value="INFO"/>
-        <appender-ref ref="FILELOGER"/>
-        <appender-ref ref="ERROR"/>
-    </category>
-    -->
 
 
     <!-- 性能监控日志 -->
-    <category name="com.baioo.cp26.common.monitor" additivity="false">
+    <category name="" additivity="false">
         <priority value="INFO"/>
         <appender-ref ref="PERF"/>
         <appender-ref ref="ERROR"/>
     </category>
     
-    <category name="com.baioo.cp26" additivity="false">
+    <category name="" additivity="false">
         <priority value="${log.priority}"/>
         <appender-ref ref="ERROR"/>
         <appender-ref ref="WARN"/>
