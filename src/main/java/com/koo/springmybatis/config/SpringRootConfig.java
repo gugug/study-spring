@@ -17,7 +17,7 @@ public class SpringRootConfig {
     @Bean
     public PropertyPlaceholderConfigurer getTestPpc() {
         PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-        ppc.setLocations(new ClassPathResource("jdbc.properties"));
+        ppc.setLocations(new ClassPathResource("jdbc2.properties"));
         return ppc;
     }
 }
