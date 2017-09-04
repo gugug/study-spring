@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * Created by gucailiang on 2017/8/22.
  */
 @Configuration
-@MapperScan(value="com.koo.springmybatis.dao")
+@MapperScan(value="com.koo.springmybatis")
 public class DaoConfig {
     @Value("${jdbc.driverClass}")
     private String driverClass;
