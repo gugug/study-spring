@@ -1,6 +1,5 @@
 package com.koo.springmybatis.controller;
 
-import com.koo.springmybatis.service.Message.MessageData;
 import com.koo.springmybatis.service.Message.MessageDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +34,10 @@ public class MessageController {
             if (temperature != null && humidity != null) {
                 currTemperature = temperature;
                 currHumidity = humidity;
-                if (messageDataService.saveInfo(currTemperature, currHumidity)) {
-                    result.put("result", "success");
-                }
+                messageDataService.saveInfo(currTemperature, currHumidity);
+                result.put("result", "success");
+            } else {
+                result.put("result", "fail");
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -47,18 +47,18 @@ public class MessageController {
     }
 
     @RequestMapping("sender")
-    public MessageData sender() {
+    public Object sender() {
         LOG.info("sender temperature: {}, humidity: {}", currTemperature, currHumidity);
-        MessageData sender = null;
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         try {
-            sender = messageDataService.sender(currTemperature, currHumidity);
+            result.put("temperature", currTemperature);
+            result.put("humidity", currHumidity);
             result.put("result", "success");
         } catch (Exception e) {
             LOG.error(e.getMessage());
             result.put("result", "fail");
         }
-        return sender;
+        return result;
     }
 
 }
