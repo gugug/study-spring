@@ -27,11 +27,12 @@ public class FileHelper {
         checkNotNull(contents, "Unable to write null contents.");
         final File newFile = new File(fileName);
         try {
-            Files.append(contents+"\n", newFile, Charsets.UTF_8);
+            Files.append(contents + "\n", newFile, Charsets.UTF_8);
         } catch (IOException fileIoEx) {
             LOG.error("ERROR trying to write to file {} - {}", fileName, fileIoEx.toString());
         }
     }
-    
+
+
 }
 
