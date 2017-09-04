@@ -3,6 +3,7 @@ package com.koo.springmybatis.controller;
 import com.koo.springmybatis.service.Message.MessageData;
 import com.koo.springmybatis.service.Message.MessageDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,8 +15,8 @@ public class MessageController {
     @Autowired
     MessageDataService messageDataService;
 
-    @RequestMapping("fetcher")
-    public MessageData fetcher() {
+    @RequestMapping("fetcher/{temperature}/{humidity}")
+    public MessageData fetcher(@PathVariable(value = "temperature") Integer temperature, @PathVariable(value = "humidity") Integer humidity) {
         MessageData fetcher = messageDataService.fetcher();
         return fetcher;
     }
