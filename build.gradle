@@ -1,0 +1,99 @@
+group 'com.baitian'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+	mavenLocal()
+	maven {
+		url "http://repo.bt/repository/maven-public/"
+	}
+
+}
+
+ext {
+	useProfileProperties = true
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+//compileJava.options.encoding = 'UTF-8'
+//
+//compileTestJava.options.encoding = 'UTF-8'
+
+
+
+dependencies {
+	testCompile('junit:junit:4.12')
+	testCompile 'org.mockito:mockito-all:1.10.19'
+	testCompile("org.springframework:spring-test:4.3.1.RELEASE")
+	compile("org.springframework:spring-context:4.3.1.RELEASE")
+	compile("org.springframework:spring-context-support:4.3.1.RELEASE")
+	compile("org.springframework:spring-webmvc:4.3.1.RELEASE")
+	compile("javax.servlet:javax.servlet-api:3.1.0")
+	compile("javax.servlet:jstl:1.2")
+	compile("com.fasterxml.jackson.core:jackson-databind:2.7")
+	compile("org.im4java:im4java:1.4.0")
+}
+
+
+processResources {
+	doFirst {
+		if (!project.properties.useProfileProperties) {
+			return;
+		}
+		def replacePropertiesKeyValues = [:];
+		def addPathConfFile = { confFile ->
+			if (file(confFile).exists()) {
+				Properties props = new Properties()
+				props.load(new FileInputStream(confFile))
+				props.each { prop ->
+					replacePropertiesKeyValues.put(prop.key, prop.value)
+				}
+			}
+		};
+		def addClassPathConfFile = { filePath ->
+			addPathConfFile(new File(sourceSets.main.resources.srcDirs[0], filePath));
+		};
+		def addConfByProfile = {
+			def profile = System.properties['profile.activate'] ?: 'dev'
+			def profilePath = System.properties['profile.path'];
+			println "+++++processResourcesWithProfile:profile=${profile},profilePath=${profilePath}---------------"
+			if (profilePath) {
+				addPathConfFile(profilePath)
+			} else {
+				if (profile == "test") {
+					addClassPathConfFile("profile/test.properties")
+				} else if (profile == "online") {
+					addClassPathConfFile("profile/online.properties")
+				} else if (profile == "dev") {
+					addClassPathConfFile("profile/dev.properties")
+				}
+			}
+		}
+		addConfByProfile()
+		filesMatching('**/*.properties') {
+			filter({ line ->
+				line.replaceAll(/\$\{(.*?)\}/, { m -> replacePropertiesKeyValues[m[1]] });
+			})
+		}
+		def extHandleConfFiles = project.properties.replaceProfileConfFiles;
+		if (extHandleConfFiles != null) {
+			for (String fileMatchItem : extHandleConfFiles.split(",")) {
+				filesMatching(fileMatchItem) {
+					filter({ line ->
+						line.replaceAll(/\$\{(.*?)\}/, { m -> replacePropertiesKeyValues[m[1]] });
+					})
+				}
+			}
+		}
+	}
+}
+
+
