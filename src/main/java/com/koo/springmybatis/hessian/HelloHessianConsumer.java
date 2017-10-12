@@ -1,6 +1,7 @@
 package com.koo.springmybatis.hessian;
 
 import com.caucho.hessian.client.HessianProxyFactory;
+import com.koo.springmybatis.constant.GlobalConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,8 @@ public class HelloHessianConsumer {
 
     private IHelloService helloService;
 
-    private String hessianUrl = "http://127.0.0.1:8080/hessianHelloService";
-
     public HelloHessianConsumer() {
-        this.helloService = createService(IHelloService.class, hessianUrl);
+        this.helloService = createService(IHelloService.class, GlobalConfig.HESSIAN_URL_HELLOSERVICE);
     }
 
     public IHelloService getIHelloService() {
