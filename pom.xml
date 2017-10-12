@@ -205,6 +205,7 @@
             <id>develop</id>
             <properties>
                 <RECORD.PATH>D:\IdeaProjects\study-spring\src\main\resources\Record\record.txt</RECORD.PATH>
+                <HESSIAN.URL.HELLOSERVICE>http://127.0.0.1:8080/hessianHelloService</HESSIAN.URL.HELLOSERVICE>
             </properties>
         </profile>
     </profiles>
