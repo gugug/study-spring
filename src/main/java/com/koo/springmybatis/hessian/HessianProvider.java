@@ -7,7 +7,7 @@ import org.springframework.remoting.caucho.HessianServiceExporter;
 import javax.annotation.Resource;
 
 @Configuration
-public class HelloHessianProvider {
+public class HessianProvider {
     @Resource
     HelloService helloService;
 
