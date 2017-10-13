@@ -7,16 +7,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 
 @Configuration
-public class HelloHessianConsumer {
+public class HessianConsumer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HelloHessianConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HessianConsumer.class);
 
     private IHelloService helloService;
 
-    public HelloHessianConsumer() {
+    public HessianConsumer() {
+        this.helloService = createService(IHelloService.class, GlobalConfig.HESSIAN_URL_HELLOSERVICE);
+    }
+
+    @PostConstruct
+    void init(){
         this.helloService = createService(IHelloService.class, GlobalConfig.HESSIAN_URL_HELLOSERVICE);
     }
 
