@@ -1,6 +1,6 @@
 package com.koo.springmybatis.service.UserPet;
 
-import java.io.Serializable;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * Created by gucailiang on 2017/8/22.
@@ -9,6 +9,7 @@ public class UserPet {
     private int userId;
     private int petId;
     private int raceId;
+    @XStreamAlias("pet_name")
     private String name;
 
     public int getUserId() {
