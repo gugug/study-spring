@@ -7,10 +7,17 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +25,8 @@ import java.util.Map;
  * Created by gucailiang on 2017/10/25.
  */
 public class XmlUtils {
+
+    private static Logger logger = LoggerFactory.getLogger(XmlUtils.class);
 
     public static XStream xStream = new XStream();
 
@@ -96,6 +105,42 @@ public class XmlUtils {
             return map;
         }
 
+    }
+
+    /**
+     * <xml>
+     * <ToUserName><![CDATA[toUser]]></ToUserName>
+     * <FromUserName><![CDATA[fromUser]]></FromUserName>
+     * <CreateTime>1348831860</CreateTime>
+     * <MsgType><![CDATA[text]]></MsgType>
+     * <Content><![CDATA[this is a test]]></Content>
+     * <MsgId>1234567890123456</MsgId>
+     * </xml>
+     *
+     * @param request
+     * @return
+     */
+    public static Map<String, String> parseHttpRequestXml(HttpServletRequest request) {
+        Map<String, String> map = new HashMap<>();
+
+        try {
+            // 从request中取得输入流
+            InputStream inputStream = request.getInputStream();
+            // 读取输入流
+            SAXReader reader = new SAXReader();
+            Document document = reader.read(inputStream);
+            // 根元素
+            Element root = document.getRootElement();
+            // 根元素下的所有子节点
+            List<Element> elementList = root.elements();
+            for (Element e : elementList)
+                map.put(e.getName(), e.getText());
+            inputStream.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+
+        return map;
     }
 
     public static void main(String[] args) {
