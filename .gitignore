@@ -17,7 +17,6 @@
 
 # IntelliJ
 out/
-test/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
