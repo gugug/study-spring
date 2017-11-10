@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by gucailiang on 2017/8/22.
  */
 @Configuration
-@ComponentScan("com.koo.springmybatis")
+@ComponentScan(basePackages = {"com.koo.springmybatis"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableTransactionManagement
 @Import(DaoConfig.class)
