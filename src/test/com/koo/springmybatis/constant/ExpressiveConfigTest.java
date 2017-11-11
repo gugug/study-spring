@@ -1,6 +1,7 @@
 package com.koo.springmybatis.constant;
 
 import com.koo.springmybatis.config.SpringRootConfig;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ExpressiveConfigTest {
 
     @Test
     public void testProperties() throws Exception {
-        expressiveConfig.testProperties();
+        Assert.assertEquals("study-spring",expressiveConfig.getTitle());
     }
 
 }
