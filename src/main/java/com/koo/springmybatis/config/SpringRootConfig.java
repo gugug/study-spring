@@ -1,5 +1,6 @@
 package com.koo.springmybatis.config;
 
+import com.koo.springmybatis.aspect.concert.AudienceWithPointcut;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -36,5 +37,10 @@ public class SpringRootConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public AudienceWithPointcut audienceWithPointcut(){
+        return new AudienceWithPointcut();
     }
 }
