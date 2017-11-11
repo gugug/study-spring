@@ -36,6 +36,14 @@ public class ExpressiveConfig {
         return env.getRequiredProperty("app.artist");
     }
 
+    public boolean containTitle(){
+        /**
+         * 是否存在属性
+         */
+        return env.containsProperty("app.artist");
+
+    }
+
     public Class<UserPet> getUserPetClass() {
         /**
          * 转化为类
