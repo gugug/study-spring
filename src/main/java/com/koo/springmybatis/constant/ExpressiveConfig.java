@@ -1,5 +1,6 @@
 package com.koo.springmybatis.constant;
 
+import com.koo.springmybatis.service.UserPet.UserPet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -14,10 +15,32 @@ public class ExpressiveConfig {
     @Autowired
     Environment env;
 
-    public void testProperties(){
-        String title = env.getProperty("app.title");
-        String artist = env.getProperty("app.artist");
-        System.out.println(title);
-        System.out.println(artist);
+    public String getTitle() {
+        /**
+         * 这个属性没有定义的时候返回null
+         */
+        return env.getProperty("app.title");
     }
+
+    public int getConnectionCount() {
+        /**
+         * 转换指定的数据类型的值，没有定义的时候使用默认值
+         */
+        return env.getProperty("db.connection.count", Integer.class, 30);
+    }
+
+    public String getArtist() {
+        /**
+         * 属性必须定义，否则报错IllegalStateException
+         */
+        return env.getRequiredProperty("app.artist");
+    }
+
+    public Class<UserPet> getUserPetClass() {
+        /**
+         * 转化为类
+         */
+        return env.getPropertyAsClass("user.class", UserPet.class);
+    }
+
 }
